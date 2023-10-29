@@ -80,9 +80,9 @@ class Intercom {
   /// You can register a identified user either with [userId] or with [email],
   /// but not with both.
   Future<void> loginIdentifiedUser(
-      {String? userId, String? email, IntercomStatusCallback? statusCallback}) {
+      {String? userId, String? email, IntercomStatusCallback? statusCallback, Map<String, dynamic>? attr}) {
     return IntercomFlutterPlatform.instance.loginIdentifiedUser(
-        userId: userId, email: email, statusCallback: statusCallback);
+        userId: userId, email: email, statusCallback: statusCallback, attr: attr);
   }
 
   /// Function to create a unidentified user in Intercom.

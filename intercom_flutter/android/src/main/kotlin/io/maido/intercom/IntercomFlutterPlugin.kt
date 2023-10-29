@@ -76,6 +76,10 @@ class IntercomFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.Str
         val userId = call.argument<String>("userId")
         if (userId != null) {
           var registration = Registration.create()
+          val attr = call.argument<Map<String, *>>("attr")
+          if (attr != null) {
+            registration.withUserAttributes(UserAttributes.Builder().withCustomAttributes(attr).build())
+          }
           registration = registration.withUserId(userId)
           Intercom.client().loginIdentifiedUser(registration, intercomStatusCallback = object : IntercomStatusCallback {
             override fun onFailure(intercomError: IntercomError) {
@@ -98,6 +102,10 @@ class IntercomFlutterPlugin : FlutterPlugin, MethodCallHandler, EventChannel.Str
         if (email != null) {
           var registration = Registration.create()
           registration = registration.withEmail(email)
+          val attr = call.argument<Map<String, *>>("attr")
+          if (attr != null) {
+            registration.withUserAttributes(UserAttributes.Builder().withCustomAttributes(attr).build())
+          }
           Intercom.client().loginIdentifiedUser(registration, intercomStatusCallback = object : IntercomStatusCallback {
             override fun onFailure(intercomError: IntercomError) {
               // Handle failure

@@ -71,7 +71,7 @@ abstract class IntercomFlutterPlatform extends PlatformInterface {
   /// You can register a identified user either with [userId] or with [email],
   /// but not with both.
   Future<void> loginIdentifiedUser(
-      {String? userId, String? email, IntercomStatusCallback? statusCallback}) {
+      {String? userId, String? email, IntercomStatusCallback? statusCallback, Map<String, dynamic>? attr}) {
     throw UnimplementedError('loginIdentifiedUser() has not been implemented.');
   }
 

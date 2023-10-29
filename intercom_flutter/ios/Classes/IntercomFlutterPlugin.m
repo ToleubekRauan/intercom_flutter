@@ -71,6 +71,10 @@ id unread;
         NSString *userId = call.arguments[@"userId"];
         ICMUserAttributes *attributes = [ICMUserAttributes new];
         attributes.userId = userId;
+        NSDictionary *attr = call.arguments[@"attr"];
+        if (attr != nil) {
+            attributes.customAttributes = attr;
+        }
         [Intercom loginUserWithUserAttributes:attributes success:^{
             // Handle success
             result(@"Registered user");
@@ -88,6 +92,10 @@ id unread;
         NSString *email = call.arguments[@"email"];
         ICMUserAttributes *attributes = [ICMUserAttributes new];
         attributes.email = email;
+        NSDictionary *attr = call.arguments[@"attr"];
+        if (attr != nil) {
+            attributes.customAttributes = attr;
+        }
         [Intercom loginUserWithUserAttributes:attributes success:^{
             // Handle success
             result(@"Registered user");

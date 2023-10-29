@@ -35,6 +35,7 @@ class MethodChannelIntercomFlutter extends IntercomFlutterPlatform {
     String? userId,
     String? email,
     IntercomStatusCallback? statusCallback,
+    Map<String, dynamic>? attr
   }) async {
     if (userId?.isNotEmpty ?? false) {
       if (email?.isNotEmpty ?? false) {
@@ -42,8 +43,10 @@ class MethodChannelIntercomFlutter extends IntercomFlutterPlatform {
             'The parameter `email` must be null if `userId` is provided.');
       }
       try {
+        final attributes = attr ?? {};
         await _channel.invokeMethod('loginIdentifiedUserWithUserId', {
           'userId': userId,
+          'attr' : attributes
         });
         statusCallback?.onSuccess?.call();
       } on PlatformException catch (e) {
@@ -51,8 +54,10 @@ class MethodChannelIntercomFlutter extends IntercomFlutterPlatform {
       }
     } else if (email?.isNotEmpty ?? false) {
       try {
+        final attributes = attr ?? {};
         await _channel.invokeMethod('loginIdentifiedUserWithEmail', {
           'email': email,
+          'attr' : attributes
         });
         statusCallback?.onSuccess?.call();
       } on PlatformException catch (e) {
